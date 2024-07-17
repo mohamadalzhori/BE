@@ -1,0 +1,21 @@
+// Used %20 for space in the URL, otherwise it will throw an error.
+
+
+// Retrieve all books published in a specific year.
+@year = 1800
+GET https://localhost:7267/odata/book?$filter=PublishedYear%20eq%20{{year}}
+
+###
+// List all loans that are overdue
+@status=false
+@today = 2024-07-16
+GET https://localhost:7267/odata/loan?$filter=returned%20eq%20{{status}}%20and%20ReturnDate%20lt%20{{today}}
+
+###
+// Find books borrowed by a specific borrower.
+@borrower = 1
+GET https://localhost:7267/odata/loan?$filter=BorrowerId%20eq%20{{borrower}}&$expand=Book
+
+###
+/// Calculate the total number of books in the library.
+GET https://localhost:7267/odata/book/$count
